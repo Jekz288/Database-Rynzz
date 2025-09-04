@@ -9,20 +9,20 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #1f1c2c, #928DAB);
       color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .login-box, .menu-box {
+    .box {
       background: rgba(0,0,0,0.7);
       padding: 30px;
       border-radius: 15px;
       text-align: center;
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
       box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
     h1 {
@@ -40,39 +40,72 @@
     button {
       width: 100%;
       padding: 15px;
-      margin-top: 10px;
+      margin: 10px 0;
       border: none;
       border-radius: 8px;
       font-size: 18px;
       cursor: pointer;
-      background: #1e90ff;
+      background: #8a2be2;
       color: white;
       transition: 0.3s;
     }
     button:hover {
-      background: #4682b4;
+      background: #6a1bb7;
     }
-    .menu-box button {
-      margin: 10px 0;
-      font-size: 20px;
-    }
-    .btn-purple { background: #a020f0; }
-    .btn-blue { background: #1e90ff; }
-    .btn-cyan { background: #00ced1; }
-    .btn-green { background: #32cd32; }
-    .btn-purple:hover { background: #9400d3; }
-    .btn-blue:hover { background: #4169e1; }
-    .btn-cyan:hover { background: #20b2aa; }
-    .btn-green:hover { background: #228b22; }
   </style>
 </head>
 <body>
   <!-- LOGIN FORM -->
-  <div class="login-box" id="loginBox">
+  <div class="box" id="loginBox">
     <h1>🔑 Login Database</h1>
     <input type="text" id="username" placeholder="Masukkan Username">
     <input type="password" id="password" placeholder="Masukkan Password">
     <button onclick="login()">Login</button>
+    <p id="errorMsg" style="color: red; margin-top:10px;"></p>
+  </div>
+
+  <!-- MENU UTAMA -->
+  <div class="box" id="menuBox" style="display:none;">
+    <h1>🔥 SELAMAT DATANG 🔥<br>DI DATABASE TANJIRO</h1>
+    <button onclick="goTo('form-add-number.html')">➕ Tambah Nomor</button>
+    <button onclick="goTo('list-numbers.html')">📋 Daftar Nomor</button>
+    <button onclick="goTo('form-add-token.html')">🤖 Tambah BOT Token</button>
+    <button onclick="goTo('list-tokens.html')">📜 Daftar BOT Token</button>
+    <button onclick="logout()">🚪 Logout</button>
+    <p style="margin-top:20px;">Created by Tanjirō Squad ⚡</p>
+  </div>
+
+  <script>
+    // 🔧 GANTI USERNAME & PASSWORD DI SINI
+    const USERNAME = "rynzz";   
+    const PASSWORD = "tanjirocrasherprivate"; 
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (user === USERNAME && pass === PASSWORD) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBox").style.display = "block";
+      } else {
+        errorMsg.textContent = "❌ Username atau Password salah!";
+      }
+    }
+
+    function goTo(page) {
+      window.location.href = page;
+    }
+
+    function logout() {
+      document.getElementById("menuBox").style.display = "none";
+      document.getElementById("loginBox").style.display = "block";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+    }
+  </script>
+</body>
+</html>    <button onclick="login()">Login</button>
     <p id="errorMsg" style="color: red; margin-top:10px;"></p>
   </div>
 
