@@ -7,72 +7,190 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
       font-family: Arial, sans-serif;
       min-height: 100vh;
+      background: #000;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #000; /* 🔥 hitam elegan */
-      color: white;
     }
-
     .box {
-      background: rgba(20,20,20,0.9);
+      background: rgba(20,20,20,0.95);
       padding: 40px;
       border-radius: 20px;
       text-align: center;
       width: 95%;
-      max-width: 550px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.9), 0 0 35px rgba(100,100,255,0.4);
-      animation: fadeIn 1s ease;
+      max-width: 600px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.9), 0 0 45px rgba(139,92,246,0.4);
     }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.95);}
-      to {opacity: 1; transform: scale(1);}
-    }
-
     h1 {
       margin-bottom: 25px;
       font-size: 28px;
       color: #b19cd9;
-      text-shadow: 0 0 8px rgba(100,100,255,0.8);
+      text-shadow: 0 0 12px rgba(139,92,246,0.9);
     }
-
     input {
       width: 100%;
-      padding: 18px;
+      padding: 15px;
       margin: 12px 0;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      font-size: 20px;
+      font-size: 18px;
       outline: none;
     }
-
-    /* Tombol full */
     .btn {
-      padding: 18px;
+      padding: 12px;
       border: none;
-      border-radius: 12px;
-      font-size: 18px;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       color: white;
+      box-shadow: 0 0 15px rgba(139,92,246,0.6);
       transition: 0.3s;
-      box-shadow: 0 0 12px rgba(139,92,246,0.6);
     }
     .btn:hover {
       background: linear-gradient(135deg, #60a5fa, #a78bfa);
-      box-shadow: 0 0 22px rgba(139,92,246,0.9);
+      box-shadow: 0 0 25px rgba(139,92,246,1);
     }
-
-    /* Grid tombol 2 kolom */
-    .menu-grid {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
+    }
+    .list {
       margin-top: 20px;
+      text-align: left;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      margin: 5px 0;
+      background: #1f1f1f;
+      border-radius: 8px;
+    }
+    .item button {
+      background: #ef4444;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .item button:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
+    <h1>🔐 masukkan username dan pasword</h1>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button class="btn" style="width:100%; margin-top:12px;" onclick="login()">Login</button>
+    <p id="msg" style="margin-top:10px; color:#f87171;"></p>
+  </div>
+
+  <!-- MENU -->
+  <div class="box" id="menuBox" style="display:none;">
+    <h1>📂 Menu Database</h1>
+    <div class="grid">
+      <button class="btn" onclick="addNumber()">➕ Tambah Nomor</button>
+      <button class="btn" onclick="showList('numbers')">📋 Daftar Nomor</button>
+      <button class="btn" onclick="addToken()">➕ Tambah Token</button>
+      <button class="btn" onclick="showList('tokens')">📋 Daftar Token</button>
+    </div>
+    <div id="listBox" class="list"></div>
+    <button class="btn" style="width:100%; margin-top:20px;" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <script>
+    // Username & password bisa kamu ubah sendiri
+    const USERNAME = "rynzz";
+    const PASSWORD = "kopi";
+
+    function login() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      if (user === USERNAME && pass === PASSWORD) {
+        localStorage.setItem("isLoggedIn", "true");
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("menuBox").style.display = "block";
+      } else {
+        document.getElementById("msg").textContent = "❌ Username / Password salah!";
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      document.getElementById("menuBox").style.display = "none";
+      document.getElementById("loginBox").style.display = "block";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("msg").textContent = "";
+      document.getElementById("listBox").innerHTML = "";
+    }
+
+    // Simpan nomor/token ke localStorage
+    function addNumber() {
+      let num = prompt("Masukkan Nomor:");
+      if (num) {
+        let numbers = JSON.parse(localStorage.getItem("numbers") || "[]");
+        numbers.push(num);
+        localStorage.setItem("numbers", JSON.stringify(numbers));
+        alert("✅ Nomor berhasil ditambahkan!");
+      }
+    }
+
+    function addToken() {
+      let token = prompt("Masukkan Token:");
+      if (token) {
+        let tokens = JSON.parse(localStorage.getItem("tokens") || "[]");
+        tokens.push(token);
+        localStorage.setItem("tokens", JSON.stringify(tokens));
+        alert("✅ Token berhasil ditambahkan!");
+      }
+    }
+
+    // Tampilkan daftar dengan tombol hapus
+    function showList(type) {
+      let data = JSON.parse(localStorage.getItem(type) || "[]");
+      let listBox = document.getElementById("listBox");
+      if (data.length === 0) {
+        listBox.innerHTML = `<p>❌ Belum ada ${type}!</p>`;
+        return;
+      }
+      listBox.innerHTML = `<h3>📋 Daftar ${type === "numbers" ? "Nomor" : "Token"}</h3>`;
+      data.forEach((item, i) => {
+        listBox.innerHTML += `
+          <div class="item">
+            <span>${item}</span>
+            <button onclick="deleteItem('${type}', ${i})">Hapus</button>
+          </div>`;
+      });
+    }
+
+    function deleteItem(type, index) {
+      let data = JSON.parse(localStorage.getItem(type) || "[]");
+      data.splice(index, 1);
+      localStorage.setItem(type, JSON.stringify(data));
+      showList(type);
+    }
+
+    // Kalau sudah login sebelumnya langsung tampil menu
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("menuBox").style.display = "block";
+    }
+  </script>
+</body>
+</html>      margin-top: 20px;
     }
   </style>
 </head>
