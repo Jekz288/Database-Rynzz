@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tambah Nomor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+
+  <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-md">
+    <h1 class="text-xl font-bold text-cyan-400 mb-4">Tambah Nomor</h1>
+    <form action="/add-number" method="POST" class="space-y-4">
+      <input type="text" name="phone" placeholder="+628..." required
+        class="w-full p-3 rounded-xl text-black focus:ring-2 focus:ring-cyan-400">
+      <button type="submit"
+        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 py-3 rounded-xl font-semibold hover:scale-105 transition-transform">
+        Simpan Nomor
+      </button>
+    </form>
+    <a href="/" class="block mt-4 text-cyan-400">⬅️ Kembali</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Nomor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+
+  <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-2xl">
+    <h1 class="text-2xl font-bold text-cyan-400 mb-4">📱 Daftar Nomor</h1>
+    <table class="w-full border-collapse border border-gray-600">
+      <thead>
+        <tr class="bg-gray-700">
+          <th class="border border-gray-600 px-3 py-2">ID</th>
+          <th class="border border-gray-600 px-3 py-2">Nomor</th>
+          <th class="border border-gray-600 px-3 py-2">Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="numberTable"></tbody>
+    </table>
+    <a href="/" class="block mt-4 text-cyan-400">⬅️ Kembali</a>
+  </div>
+
+  <script>
+    async function loadNumbers() {
+      const res = await fetch("/numbers");
+      const data = await res.json();
+      const tbody = document.getElementById("numberTable");
+      tbody.innerHTML = data.map(n => `
+        <tr>
+          <td class="border border-gray-600 px-3 py-2">${n.id}</td>
+          <td class="border border-gray-600 px-3 py-2">${n.phone}</td>
+          <td class="border border-gray-600 px-3 py-2 text-center">
+            <a href="/delete-number/${n.id}" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Hapus</a>
+          </td>
+        </tr>
+      `).join("");
+    }
+    loadNumbers();
+  </script>
+
+</body>
+</html>
