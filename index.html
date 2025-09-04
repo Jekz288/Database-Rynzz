@@ -9,48 +9,70 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928DAB);
-      color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      background: #000; /* 🔥 hitam elegan */
+      color: white;
     }
+
     .box {
-      background: rgba(0,0,0,0.7);
-      padding: 30px;
-      border-radius: 15px;
+      background: rgba(20,20,20,0.9);
+      padding: 40px;
+      border-radius: 20px;
       text-align: center;
-      width: 90%;
-      max-width: 420px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      width: 95%;
+      max-width: 550px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.9), 0 0 35px rgba(100,100,255,0.4);
+      animation: fadeIn 1s ease;
     }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
     h1 {
-      margin-bottom: 20px;
-      font-size: 26px;
+      margin-bottom: 25px;
+      font-size: 28px;
+      color: #b19cd9;
+      text-shadow: 0 0 8px rgba(100,100,255,0.8);
     }
+
     input {
       width: 100%;
-      padding: 15px;
-      margin: 10px 0;
+      padding: 18px;
+      margin: 12px 0;
       border-radius: 8px;
       border: none;
-      font-size: 18px;
+      font-size: 20px;
+      outline: none;
     }
-    button {
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
+
+    /* Tombol full */
+    .btn {
+      padding: 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 18px;
       cursor: pointer;
-      background: #8a2be2;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       color: white;
       transition: 0.3s;
+      box-shadow: 0 0 12px rgba(139,92,246,0.6);
     }
-    button:hover {
-      background: #6a1bb7;
+    .btn:hover {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      box-shadow: 0 0 22px rgba(139,92,246,0.9);
+    }
+
+    /* Grid tombol 2 kolom */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -60,29 +82,33 @@
     <h1>🔑 Login Database</h1>
     <input type="text" id="username" placeholder="Masukkan Username">
     <input type="password" id="password" placeholder="Masukkan Password">
-    <button onclick="login()">Login</button>
+    <button class="btn" id="loginBtn">Login</button>
     <p id="errorMsg" style="color: red; margin-top:10px;"></p>
   </div>
 
   <!-- MENU UTAMA -->
   <div class="box" id="menuBox" style="display:none;">
     <h1>🔥 SELAMAT DATANG 🔥<br>DI DATABASE TANJIRO</h1>
-    <button onclick="goTo('form-add-number.html')">➕ Tambah Nomor</button>
-    <button onclick="goTo('list-numbers.html')">📋 Daftar Nomor</button>
-    <button onclick="goTo('form-add-token.html')">🤖 Tambah BOT Token</button>
-    <button onclick="goTo('list-tokens.html')">📜 Daftar BOT Token</button>
-    <button onclick="logout()">🚪 Logout</button>
+    <div class="menu-grid">
+      <button class="btn" onclick="goTo('form-add-number.html')">➕ Tambah Nomor</button>
+      <button class="btn" onclick="goTo('list-numbers.html')">📋 Daftar Nomor</button>
+      <button class="btn" onclick="goTo('form-add-token.html')">🤖 Tambah Token</button>
+      <button class="btn" onclick="goTo('list-tokens.html')">📜 Daftar Token</button>
+    </div>
+    <button class="btn" style="margin-top:20px; width:100%;" onclick="logout()">🚪 Logout</button>
     <p style="margin-top:20px;">Created by Tanjirō Squad ⚡</p>
   </div>
 
   <script>
-    // 🔧 GANTI USERNAME & PASSWORD DI SINI
+    // 🔧 SET USERNAME & PASSWORD DISINI
     const USERNAME = "rynzz";   
-    const PASSWORD = "tanjirocrasherprivate"; 
+    const PASSWORD = "unlimited"; 
+
+    document.getElementById("loginBtn").addEventListener("click", login);
 
     function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
       const errorMsg = document.getElementById("errorMsg");
 
       if (user === USERNAME && pass === PASSWORD) {
@@ -102,39 +128,7 @@
       document.getElementById("loginBox").style.display = "block";
       document.getElementById("username").value = "";
       document.getElementById("password").value = "";
-    }
-  </script>
-</body>
-</html>    <button onclick="login()">Login</button>
-    <p id="errorMsg" style="color: red; margin-top:10px;"></p>
-  </div>
-
-  <!-- MENU UTAMA -->
-  <div class="menu-box" id="menuBox" style="display:none;">
-    <h1>🔥 SELAMAT DATANG 🔥<br>DI DATABASE TANJIRO</h1>
-    <button class="btn-purple">➕ Tambah Nomor</button>
-    <button class="btn-blue">📋 Daftar Nomor</button>
-    <button class="btn-cyan">🤖 Tambah BOT Token</button>
-    <button class="btn-green">📜 Daftar BOT Token</button>
-    <p style="margin-top:20px;">Created by Tanjirō Squad ⚡</p>
-  </div>
-
-  <script>
-    // 🔧 SETTING USERNAME & PASSWORD DI SINI
-    const USERNAME = "rynzz";   // ubah sesuai keinginanmu
-    const PASSWORD = "Gak usah nyebar memeq"; // ubah sesuai keinginanmu
-
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      const errorMsg = document.getElementById("errorMsg");
-
-      if (user === USERNAME && pass === PASSWORD) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("menuBox").style.display = "block";
-      } else {
-        errorMsg.textContent = "❌ Username atau Password salah!";
-      }
+      document.getElementById("errorMsg").textContent = "";
     }
   </script>
 </body>
