@@ -90,7 +90,7 @@
 <body>
   <!-- LOGIN -->
   <div class="box" id="loginBox">
-    <h1>🔐 masukkan username dan pasword</h1>
+    <h1>🔐 Login</h1>
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
     <button class="btn" style="width:100%; margin-top:12px;" onclick="login()">Login</button>
@@ -112,8 +112,8 @@
 
   <script>
     // Username & password bisa kamu ubah sendiri
-    const USERNAME = "rynzz";
-    const PASSWORD = "kopi";
+    const USERNAME = "admin";
+    const PASSWORD = "1234";
 
     function login() {
       const user = document.getElementById("username").value.trim();
@@ -187,66 +187,6 @@
     if (localStorage.getItem("isLoggedIn") === "true") {
       document.getElementById("loginBox").style.display = "none";
       document.getElementById("menuBox").style.display = "block";
-    }
-  </script>
-</body>
-</html>      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <!-- LOGIN FORM -->
-  <div class="box" id="loginBox">
-    <h1>🔑 Login Database</h1>
-    <input type="text" id="username" placeholder="Masukkan Username">
-    <input type="password" id="password" placeholder="Masukkan Password">
-    <button class="btn" id="loginBtn">Login</button>
-    <p id="errorMsg" style="color: red; margin-top:10px;"></p>
-  </div>
-
-  <!-- MENU UTAMA -->
-  <div class="box" id="menuBox" style="display:none;">
-    <h1>🔥 SELAMAT DATANG 🔥<br>DI DATABASE TANJIRO</h1>
-    <div class="menu-grid">
-      <button class="btn" onclick="goTo('form-add-number.html')">➕ Tambah Nomor</button>
-      <button class="btn" onclick="goTo('list-numbers.html')">📋 Daftar Nomor</button>
-      <button class="btn" onclick="goTo('form-add-token.html')">🤖 Tambah Token</button>
-      <button class="btn" onclick="goTo('list-tokens.html')">📜 Daftar Token</button>
-    </div>
-    <button class="btn" style="margin-top:20px; width:100%;" onclick="logout()">🚪 Logout</button>
-    <p style="margin-top:20px;">Created by Tanjirō Squad ⚡</p>
-  </div>
-
-  <script>
-    // 🔧 SET USERNAME & PASSWORD DISINI
-    const USERNAME = "rynzz";   
-    const PASSWORD = "unlimited"; 
-
-    document.getElementById("loginBtn").addEventListener("click", login);
-
-    function login() {
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
-      const errorMsg = document.getElementById("errorMsg");
-
-      if (user === USERNAME && pass === PASSWORD) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("menuBox").style.display = "block";
-      } else {
-        errorMsg.textContent = "❌ Username atau Password salah!";
-      }
-    }
-
-    function goTo(page) {
-      window.location.href = page;
-    }
-
-    function logout() {
-      document.getElementById("menuBox").style.display = "none";
-      document.getElementById("loginBox").style.display = "block";
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("errorMsg").textContent = "";
     }
   </script>
 </body>
